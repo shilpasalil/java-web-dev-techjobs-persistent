@@ -57,6 +57,7 @@ public class HomeController {
             model.addAttribute("title", "Add Job");
             return "add";
         }
+
         Optional<Employer> optionalEmployer = employerRepository.findById(employerId);
         if(optionalEmployer.isEmpty()){
             return "add";
@@ -65,6 +66,7 @@ public class HomeController {
             newJob.setEmployer(employer);
             List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
             newJob.setSkills(skillObjs);
+            jobRepository.save(newJob);
         }
 
         return "redirect:";
